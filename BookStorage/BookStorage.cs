@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace BookStorage
@@ -8,7 +9,18 @@ namespace BookStorage
     {
         public bool AddBook(Book someBook)
         {
-            throw new NotImplementedException();
+            bool isAddBook = false;
+
+            if (someBook == null)
+            {
+                return isAddBook;
+            }
+
+            FileManager fManager = new FileManager();
+
+            fManager.WriteRecordInFile(someBook);
+
+            return isAddBook = true;
         }
 
         public bool DeleteBook(Book someBook)
