@@ -20,10 +20,8 @@ namespace BookStorage
             }
         }
 
-        public IEnumerable<Book> GetBooksFromFile()
+        public Book GetBooksFromFile()
         {
-            IList<Book> lists = new List<Book>();
-
             using (var reader = new StreamReader(DeffaultSettings.TXT_FILE))
             {
                 using (var json = new JsonTextReader(reader))
@@ -33,7 +31,7 @@ namespace BookStorage
                         throw new NullReferenceException();
                     }
 
-                    yield return _serializer.Deserialize<Book>(json);
+                    return _serializer.Deserialize<Book>(json);
                 }
             }
         }
