@@ -10,10 +10,10 @@ namespace BookStorage
             Book book2 = new Book("History", "school book", "В.В Васильев", 500, "16.10.2000");
             BookStorage storage = new BookStorage();
 
-            //storage.AddBook(book);
-            //storage.AddBook(book2);
+            storage.AddBook(book);
+            storage.AddBook(book2);
 
-            var data = storage.GetAllBooks();
+            var data = storage.GetBooks();
 
             Console.ReadKey();
         }

@@ -8,7 +8,7 @@ namespace BookStorage
     {
         public bool AddBook(Book someBook);
 
-        public Book GetBook();
+        public IEnumerable<Book> GetBooks();
 
         public bool UpdateBook(Book someBook);
 

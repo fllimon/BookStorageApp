@@ -8,32 +8,19 @@ namespace BookStorage
 {
     class FileManager
     {
-        private readonly JsonSerializer _serializer = new JsonSerializer();
-
-        public void WriteRecordInFile(Book book)
+        public void WriteRecordInFile(IList<Book> books)
         {
-            using (StreamWriter writer = new StreamWriter(DeffaultSettings.TXT_FILE, true))
+            using (StreamWriter writer = new StreamWriter(DeffaultSettings.TXT_FILE))
             {
-                var data = JsonConvert.SerializeObject(book, Formatting.Indented);
+                var data = JsonConvert.SerializeObject(books);
 
                 writer.WriteLine(data);
             }
         }
 
-        public Book GetBooksFromFile()
+        public IEnumerable<Book> GetBooksFromFile()
         {
-            using (var reader = new StreamReader(DeffaultSettings.TXT_FILE))
-            {
-                using (var json = new JsonTextReader(reader))
-                {
-                    if (json == null)
-                    {
-                        throw new NullReferenceException();
-                    }
-
-                    return _serializer.Deserialize<Book>(json);
-                }
-            }
+            return JsonConvert.DeserializeObject<List<Book>>(File.ReadAllText(DeffaultSettings.TXT_FILE));
         }
     }
 }

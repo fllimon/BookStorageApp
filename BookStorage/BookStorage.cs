@@ -8,9 +8,12 @@ namespace BookStorage
     class BookStorage : IBookStorage
     {
         private readonly FileManager _fManager;
+        private IList<Book> _books;
+
         public BookStorage()
         {
             _fManager = new FileManager();
+            _books = new List<Book>();
         }
 
         public bool AddBook(Book someBook)
@@ -22,7 +25,9 @@ namespace BookStorage
                 return isAddBook;
             }
 
-            _fManager.WriteRecordInFile(someBook);
+            _books.Add(someBook);
+
+            _fManager.WriteRecordInFile(_books);
 
             return isAddBook = true;
         }
@@ -32,7 +37,7 @@ namespace BookStorage
             throw new NotImplementedException();
         }
 
-        public Book GetBooks()
+        public IEnumerable<Book> GetBooks()
         {
             return _fManager.GetBooksFromFile();
         }
