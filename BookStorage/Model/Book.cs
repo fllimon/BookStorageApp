@@ -6,14 +6,23 @@ namespace BookStorage
 {
     class Book
     {
-        public string Title { get; set; }
+        public Book(string title, string description, string author, decimal price, string year)
+        {
+            Title = title;
+            Description = description;
+            Author = author;
+            Price = price;
+            Year = year;
+        }
 
-        public string Description { get; set; }
+        public string Title { get; }
 
-        public string Author { get; set; }
+        public string Description { get; }
 
-        public decimal Price { get; set; }
+        public string Author { get; }
 
-        public string Year { get; set; }
+        public decimal Price { get; }
+
+        public string Year { get; }
     }
 }
