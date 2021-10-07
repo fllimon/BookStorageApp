@@ -10,7 +10,7 @@ namespace BookStorage
             Book book2 = new Book("History", "school book", "В.В Васильев", 500, "16.10.2000");
             Book book3 = new Book("History", "school book", "A.A Васильев", 700, "16.10.2010");
 
-            BookStorage storage = new BookStorage();
+            IBookStorage storage = new BookStorage();
 
             storage.AddBook(book);
             storage.AddBook(book2);

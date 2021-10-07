@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Text;
+
 
 namespace BookStorage
 {
@@ -98,7 +96,7 @@ namespace BookStorage
             return isUpdated;
         }
 
-        public bool CompareTo([AllowNull] Book x, [AllowNull] Book y)
+        private bool CompareTo([AllowNull] Book x, [AllowNull] Book y)
         {
             bool isEqual = false;
 
