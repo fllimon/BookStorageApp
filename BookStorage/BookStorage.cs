@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 
@@ -34,7 +35,29 @@ namespace BookStorage
 
         public bool DeleteBook(Book someBook)
         {
-            throw new NotImplementedException();
+            bool isDeleted = false;
+
+            if (someBook == null)
+            {
+                return isDeleted;
+            }
+
+            IEnumerable<Book> books = _fManager.GetBooksFromFile();
+
+            foreach (Book book in books)
+            {
+                if (CompareTo(book, someBook))
+                {
+                    _books.Remove(someBook);
+                    _fManager.WriteRecordInFile(_books);
+                    
+                    isDeleted = true;
+
+                    break;
+                }
+            }
+
+            return isDeleted;
         }
 
         public IEnumerable<Book> GetBooks()
@@ -42,9 +65,50 @@ namespace BookStorage
             return _fManager.GetBooksFromFile();
         }
 
-        public bool UpdateBook(Book someBook)
+        public bool UpdateBookByTitle(Book oldBook, Book newBook)
         {
-            throw new NotImplementedException();
+            bool isUpdated = false;
+
+            if (oldBook == null)
+            {
+                return isUpdated;
+            }
+
+            if (newBook == null)
+            {
+                return isUpdated;
+            }
+
+            IEnumerable<Book> books = _fManager.GetBooksFromFile();
+
+            foreach (Book book in books)
+            {
+                if (book.Title == oldBook.Title)
+                {
+                    _books.Remove(oldBook);
+
+                    _books.Add(newBook);
+                    _fManager.WriteRecordInFile(_books);
+                    isUpdated = true;
+
+                    break;
+                }
+            }
+
+            return isUpdated;
+        }
+
+        public bool CompareTo([AllowNull] Book x, [AllowNull] Book y)
+        {
+            bool isEqual = false;
+
+            if ((x.Title == y.Title) && (x.Description == y.Description) &&
+                (x.Author == y.Author) && (x.Price == y.Price) && (x.Year == y.Year))
+            {
+                return isEqual = true;
+            }
+
+            return isEqual;
         }
     }
 }

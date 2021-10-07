@@ -10,7 +10,7 @@ namespace BookStorage
 
         public IEnumerable<Book> GetBooks();
 
-        public bool UpdateBook(Book someBook);
+        public bool UpdateBookByTitle(Book oldBook, Book newBook);
 
         public bool DeleteBook(Book someBook);
     }
